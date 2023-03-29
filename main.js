@@ -37,7 +37,7 @@ function draw() {
   if (hizoClick == true)
   {
     //pintarCasillero(columnaPresionada, filaPresionada, COLOR_CASILLERO_SIN_MINA); //pinta el casillero clickeado. Modificar/completar
-    if (mouseBotton == LEFT)
+    if (mouseButton == LEFT)
     {
       if(tieneMinaCasillero(filaPresionada,columnaPresionada))
       {
