@@ -19,6 +19,7 @@ var casillerosSinDescubrir;
 
 function setup()
 {
+  casillerosSinDescubrir = COLUMNAS*FILAS;
   createCanvas(500, 500);   //crea un lienzo o panel donde estará el juego. El primer parámetro es el ancho y el segundo el alto del lienzo.
   laMagiaDeLosProfes();
 
@@ -27,9 +28,9 @@ function setup()
   COLOR_CASILLERO_SIN_MINA = color("#1CC932");
   COLOR_CASILLERO_MARCADO = color("#278EF2");
 
-
-  // Modificar/completar
   ponerMinaCasillero(0,0);
+
+  ponerMinasTablero();
 }
 
 
@@ -48,24 +49,40 @@ function draw() {
         descubrirCasillero(columnaPresionada, filaPresionada);
       }
    }
-
+   if (mouseButton == RIGHT){
+    pintarCasillero(columnaPresionada, filaPresionada,COLOR_CASILLERO_MARCADO);
+   }
     
     hizoClick = false;  //Indico que ya "procesé" el click del usuario. NO modificar
   }
-  //if(mouseBotton == RIGHT)
 
+  if (ganoElJuego()){
+    ganar();
+  }
 }
 
 
 function ganoElJuego()
 {
-  return false;   //Esto hace que NUNCA gane el juego. Modificar/completar
+  return (casillerosSinDescubrir == CANTIDAD_MINAS);   
 }
 
 function ponerMinasTablero()
 {
-  // Modificar/completar
+
+  function unaMinaEnTablero(){
+    numeroAleatorio = floor(random(0,100));
+     
+  }
+  /*
+  for(let contador = 0; contador <10; contador++){
+    numeroAleatorio = floor(random(0,100));
+    ponerMinaCasillero(numeroAleatorio);
+
+
+  }*/
 }
+
 
 function mostrarMinas()
 {
