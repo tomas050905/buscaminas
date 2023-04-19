@@ -63,33 +63,58 @@ function draw() {
 
 
 function ganoElJuego()
-{
-  return (casillerosSinDescubrir == CANTIDAD_MINAS);   
-}
 
+{
+  if (casillerosSinDescubrir > CANTIDAD_MINAS)
+  {
+    return false; 
+  }
+  else
+  {
+    return true;
+  }
+}
 function ponerMinasTablero()
 {
-
-  function unaMinaEnTablero(){
-    numeroAleatorio = floor(random(0,100));
-     
+  let i = 0;
+  while(i < CANTIDAD_MINAS){
+    var filaRandom = Math.floor(Math.random()*FILAS);
+    var columnaRandom = Math.floor(Math.random()*COLUMNAS);
+    if(tieneMinaCasillero(columnaRandom, filaRandom))
+    {
+      console.log(columnaRandom, filaRandom);
+    }
+    else{
+      ponerMinaCasillero(columnaRandom, filaRandom);
+      i++
+      console.log(columnaRandom,filaRandom);
+    }
   }
-  /*
-  for(let contador = 0; contador <10; contador++){
-    numeroAleatorio = floor(random(0,100));
-    ponerMinaCasillero(numeroAleatorio);
-
-
-  }*/
 }
 
 
 function mostrarMinas()
 {
-  // Modificar/completar
+  for(let i = 0; i < FILAS; i++){
+    for(let colum = 0; colum < COLUMNAS; colum++)
+    if(tieneMinaCasillero(i, colum)){
+      pintarCasillero(i,colum, COLOR_CASILLERO_CON_MINA)
+    }
+    else{
+      colum = colum + 1;
+    }
+  }
 }
 
 function contarMinasAlrededor(columna, fila)
 {
-  return 9;   //Esto hace que SIEMPRE cuente 9 minas alrededor. Modificar/completar
+  let minaCont = 0;
+  let minaColumnas = [1,-1, -1, 0, 1, -1, 0, 1];
+  let minaFilas = [0, 0, -1, -1, -1, 1, 1, 1];
+  for(let i=0; i < 8; i++){
+    if(tieneMinaCasillero((minaColumnas[i]+columnaPresionada),(minaFilas[i]+filaPresionada))){
+      minaCont++;
+    }
+  }
+  return minaCont;
 }
